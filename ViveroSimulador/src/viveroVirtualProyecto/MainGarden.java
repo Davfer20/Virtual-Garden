@@ -69,7 +69,7 @@ public class MainGarden {
 	        		int efectoVida = Integer.parseInt(efectoVidaStr);
 	        		int efectoAgua = Integer.parseInt(efectoAguaStr);
 	        		
-	        		System.out.println("EstadoPlanta: "+estadoPlanta);
+	        		System.out.println("EstadoPlantas: "+estadoPlanta); //hola
 	        		System.out.println("Dias a crecer: "+diasPlanta);
 	        		System.out.println("Min vida: "+minLife);
 	        		System.out.println("MaxVida: "+maxLife);
