@@ -1,6 +1,7 @@
 package viveroVirtualProyecto;
 
 import jsonScanners.TimeThread;
+
 import java.io.*;
 
 import java.lang.reflect.Field;
@@ -69,8 +70,8 @@ public class MainGarden {
 	        		int efectoVida = Integer.parseInt(efectoVidaStr);
 	        		int efectoAgua = Integer.parseInt(efectoAguaStr);
 	        		
-	        		System.out.println("EstadoPlantas: "+estadoPlanta); //hola
-	        		System.out.println("Dias a crecer: "+diasPlanta); //Adios
+	        		System.out.println("EstadoPlantas: "+estadoPlanta);
+	        		System.out.println("Dias a crecer: "+diasPlanta); 
 	        		System.out.println("Min vida: "+minLife);
 	        		System.out.println("MaxVida: "+maxLife);
 	        		System.out.println("Water Min: "+waterMin);

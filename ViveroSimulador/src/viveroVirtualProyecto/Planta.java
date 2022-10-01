@@ -1,6 +1,7 @@
 package viveroVirtualProyecto;
 
 import jsonScanners.seasonScanner;
+
 public class Planta {
 	private String crecimiento;
 	private String relacionMinutos;
@@ -162,7 +163,7 @@ public class Planta {
 		this.Urlmuerta = pUrl;
 	}
 	
-	public void evaluate()
+	public void evaluate(int currentDays)
 	{
 		if(Urlmuerta == Urlviva)
 		{
