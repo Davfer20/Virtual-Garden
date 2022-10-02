@@ -16,4 +16,15 @@ public class SeasonTypeRead {
 	{
 		this.season = pSeason;
 	}
+	public ArrayList<?> getRules() {
+		return reglasSeason;
+	}
+	
+	public void setRules(ArrayList<?> rules) {
+		this.reglasSeason = rules;
+	}
+	public void getRulesVariable ()
+	{
+		
+	}
 }

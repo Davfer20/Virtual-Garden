@@ -2,7 +2,8 @@ package viveroVirtualProyecto;
 
 import java.util.ArrayList;
 
-public class EstadoPlanta {
+public class Estado {
+	private int estado;
 	private int dias;
 	private int minLife;
 	private int maxLife;
@@ -15,6 +16,10 @@ public class EstadoPlanta {
 	private int waterEfect;
 	private ArrayList<?>URLs;
 	
+	public int getEstado()
+	{
+		return estado;
+	}
 	public int getDias()
 	{
 		return dias;
@@ -49,26 +54,30 @@ public class EstadoPlanta {
 	public ArrayList<?> getURls() {
 		return URLs;
 	}
-	public void setDias(int pDias)
+	public void setEstadoID(int pEstado)
+	{
+		this.estado = pEstado;
+	}
+	public void setDiasEnCreces(int pDias)
 	{
 		this.dias= pDias;
 	}
-	public void setMinLife(int minLife) {
+	public void setminLife(int minLife) {
 		this.minLife = minLife;
 	}
-	public void setMaxLife(int maxLife) {
+	public void setmaxlife(int maxLife) {
 		this.maxLife = maxLife;
 	}
-	public void setWaterMin(int waterMin) {
+	public void setminWater(int waterMin) {
 		this.waterMin = waterMin;
 	}
-	public void setWaterMax(int waterMax) {
+	public void setmaxWater(int waterMax) {
 		this.waterMax = waterMax;
 	}
-	public void setAbonoMin(int abonoMin) {
+	public void setminabono(int abonoMin) {
 		this.abonoMin = abonoMin;
 	}
-	public void setAbonoMax(int abonoMax) {
+	public void setmaxabono(int abonoMax) {
 		this.abonoMax = abonoMax;
 	}
 	public void setAbonoEfect(int abonoEfect) {
@@ -77,7 +86,7 @@ public class EstadoPlanta {
 	public void setVidaEfect(int vidaEfect) {
 		this.vidaEfect = vidaEfect;
 	}
-	public void setWaterEfect(int waterEfect) {
+	public void setAguaEfect(int waterEfect) {
 		this.waterEfect = waterEfect;
 	}
 	public void setURls(ArrayList<?> uRls) {
@@ -86,7 +95,7 @@ public class EstadoPlanta {
 	public void ShowData()
 	{
 		System.out.println("Prueba sobre tener URL"+ URLs);
-		System.out.println("Prueba sobre tener vidaEfect"+ URLs);
+		System.out.println("Prueba sobre tener vidaEfect"+ abonoMin);
 		System.out.println("Prueba sobre dias"+dias);
 	}
 }

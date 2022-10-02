@@ -13,8 +13,6 @@ import org.json.simple.parser.*;
 public class MainGarden {
 	public static void main(String[] args) {		
 		JSONParser parser = new JSONParser();
-		TimeThread adminTread = new TimeThread();
-		adminTread.run();
 		try {
 			
 			Object obj = parser.parse(new FileReader("/Users/Davfer/OneDrive/Documents/TEC 2 Semestre/garden.json"));
