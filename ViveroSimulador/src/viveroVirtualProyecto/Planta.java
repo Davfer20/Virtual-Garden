@@ -64,7 +64,6 @@ public class Planta extends PlantTypeRead{
 		this.agua = agua;
 	}
 
-
 	public void evaluate(int currentDays)
 	{
 	}

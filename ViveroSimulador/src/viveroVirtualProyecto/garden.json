@@ -1,171 +1,135 @@
 {
-    "VelocidadCrecimiento" : "20",
-    "RelacionMinutos" : "2",
-    "Planta":[
-      {
-        "Nombre" : "Manzano",
-        "Edad" : "0",
-        "Vida" : "100",
-        "Puntos Agua": "50",
-        "Sol" : "0",
-        "Fertilizante" : "0",
-        "Fertilizante Req" : "40",
-        "Crecimiento Max" : "80",
-        "Tasa Crecimiento" : "0",
-        "Foto" : "url",
-        "Tipo" : "Default",
-        "Niveles" : [
-          {
-            "Number" : "0",
-            "Dias Crecer" : "20",
-            "Vida" : "Ulr viva",
-            "Muerta" : "Url Muerta",
-            "Ahogada" : "Ahogada"
-          },
-          {
-            "Number" : "1",
-            "Dias Crecer" : "450",
-            "Vida" : "Ulr viva",
-            "Muerta" : "Url Muerta",
-            "Ahogada" : "Ahogada"
-          }
-        ],
-        "Estado" : [
-              {
-                  "nombre": "Almacigo",
-                  "minLife" : "70",
-                  "maxLife" : "10",
-                  "rules" : [{
-                    "tiempo" : "12",
-                    "unidad" : "dias",
-                    "waterMinReq" : "0",
-                    "waterMaxReq" : "40",
-                    "abonoMinReq" : "10",
-                    "abonoMaxReq" : "30",
-                    "abonoEfect" : "4",
-                    "efectoVida" : "-5"
-                      }]
-              },
-              {
-                  "nombre": "Adulta",
-                  "minLife" : "50",
-                  "maxLife" : "100",
-                  "rules" : [{
-                    "tiempo" : "12",
-                    "unidad" : "dias",
-                    "waterMinReq" : "0",
-                    "waterMaxReq" : "40",
-                    "abonoMinReq" : "10",
-                    "abonoMaxReq" : "40",
-                    "abonoEfect" : "2",
-                    "efectoVida" : "-3"
-                      }]
-      }]
+  "Planta" : [ {
+    "Nombre" : "Manzano",
+    "Niveles" : [ {
+      "Estado" : "0",
+      "Dias Crecer" : "60",
+      "minLife" : "70",
+      "maxLife" : "100",
+      "waterMinReq" : "0",
+      "waterMaxReq" : "40",
+      "abonoMinReq" : "10",
+      "abonoMaxReq" : "30",
+      "abonoEfect" : "4",
+      "efectoVida" : "-5",
+      "AguaEfecto" : "-3",
+      "Vida" : "Ulr viva",
+      "Muerta" : "Url Muerta",
+      "Ahogada" : "Url Muerta"
+    }, {
+      "Estado" : "1",
+      "Dias Crecer" : "200",
+      "minLife" : "50",
+      "maxLife" : "100",
+      "waterMinReq" : "20",
+      "waterMaxReq" : "60",
+      "abonoMinReq" : "10",
+      "abonoMaxReq" : "40",
+      "abonoEfect" : "2",
+      "efectoVida" : "-4",
+      "AguaEfecto" : "-4",
+      "Vida" : "Ulr viva",
+      "Muerta" : "Url Muerta",
+      "Ahogada" : "Ahogada"
     },
-    {"Nombre" : "Naranjo",
-    "Edad" : "0",
-    "Vida" : "100",
-    "Puntos Agua": "50",
-    "Sol" : "0",
-    "Fertilizante" : "0",
-    "Fertilizante Req" : "40",
-    "Crecimiento Max" : "80",
-    "Tasa Crecimiento" : "0",
-    "Foto" : "url",
-    "Tipo" : "Default",
-    "Niveles" : [
-      {
-        "Number" : "0",
-        "Dias Crecer" : "20",
-        "Vida" : "Ulr viva",
-        "Muerta" : "Url Muerta",
-        "Ahogada" : "Ahogada"
-      },
-      {
-        "Number" : "1",
-        "Dias Crecer" : "450",
-        "Vida" : "Ulr viva",
-        "Muerta" : "Url Muerta",
-        "Ahogada" : "Ahogada"
-      }
-    ],
-    "Estado" : [
-          {
-              "nombre": "Almacigo",
-              "minLife" : "70",
-              "maxLife" : "10",
-              "rules" : [{
-                "tiempo" : "12",
-                "unidad" : "dias",
-                "waterMinReq" : "0",
-                "waterMaxReq" : "40",
-                "abonoMinReq" : "10",
-                "abonoMaxReq" : "30",
-                "abonoEfect" : "4",
-                "efectoVida" : "-5"
-                  }]
-          },
-          {
-              "nombre": "Adulta",
-              "minLife" : "50",
-              "maxLife" : "100",
-              "rules" : [{
-                "tiempo" : "12",
-                "unidad" : "dias",
-                "waterMinReq" : "0",
-                "waterMaxReq" : "40",
-                "abonoMinReq" : "10",
-                "abonoMaxReq" : "40",
-                "abonoEfect" : "2",
-                "efectoVida" : "-3"
-                  }]
-  }]
-              }
-    
-  ],
-    "Season":[
-      {
-        "EstacionActual": [
-          {
-        "Nombre Estacion" : "Summer",
-        "startDate": "8/8/2022",
-        "endDate": "8/8/2022",
-        "isActive" : "true",
-        "Temperatura  Min" : "30",
-        "Temperatura Max" : "60",  
-        "Precipitacion" : "2",
-        "AguaEfecto" : "2"
-          },
-        {
-        "Nombre Estacion" : "Spring",
-        "startDate": "3/4/2022",
-        "endDate": "5/4/2022",
-        "isActive" : "true",
-        "Temperatura  Min" : "10",
-        "Temperatura Max" : "30",
-        "Precipitacion" : "4",
-        "AguaEfecto" : "2"
-          },
-        {
-        "Nombre Estacion" : "Fall",
-        "startDate": "3/7/2022",
-        "endDate": "3-7/2022",
-        "isActive" : "true",
-        "Temperatura  Min" : "15",
-        "Temperatura Max" : "30",
-        "Precipitacion" : "6",
-        "AguaEfecto" : "2"
-          },
-          {
-          "Nombre Estacion" : "Winter",
-          "startDate": "1/8/2022",
-          "endDate": "1/8/2022",
-          "isActive" : "true",
-          "Temperatura  Min" : "5",
-          "Temperatura Max" : "15",
-          "Precipitacion" : "8",
-          "AguaEfecto" : "2"
-          }]
-      }
-  ]
-  }  
+    {
+      "Estado" : "2",
+      "Dias Crecer" : "500",
+      "minLife" : "50",
+      "maxLife" : "100",
+      "waterMinReq" : "20",
+      "waterMaxReq" : "60",
+      "abonoMinReq" : "10",
+      "abonoMaxReq" : "40",
+      "abonoEfect" : "2",
+      "efectoVida" : "-4",
+      "AguaEfecto" : "-4",
+      "Vida" : "Ulr viva",
+      "Muerta" : "Url Muerta",
+      "Ahogada" : "Ahogada"
+    }]
+  }, {
+    "Nombre" : "Culantro",
+    "Niveles" : [ {
+      "Estado" : "0",
+      "Dias Crecer" : "20",
+      "minLife" : "70",
+      "maxLife" : "100",
+      "waterMinReq" : "0",
+      "waterMaxReq" : "40",
+      "abonoMinReq" : "10",
+      "abonoMaxReq" : "30",
+      "abonoEfect" : "4",
+      "efectoVida" : "-5",
+      "AguaEfecto" : "-3",
+      "Vida" : "Ulr viva",
+      "Muerta" : "Url Muerta",
+      "Ahogada" : "Ahogada"
+    }, {
+      "Estado" : "1",
+      "Dias Crecer" : "220",
+      "minLife" : "50",
+      "maxLife" : "100",
+      "waterMinReq" : "0",
+      "waterMaxReq" : "40",
+      "abonoMinReq" : "10",
+      "abonoMaxReq" : "30",
+      "abonoEfect" : "4",
+      "efectoVida" : "-5",
+      "AguaEfecto" : "-3",
+      "Vida" : "Ulr viva",
+      "Muerta" : "Url Muerta",
+      "Ahogada" : "Ahogada"
+    },{
+    "Estado" : "2",
+      "Dias Crecer" : "420",
+      "minLife" : "50",
+      "maxLife" : "100",
+      "waterMinReq" : "0",
+      "waterMaxReq" : "40",
+      "abonoMinReq" : "10",
+      "abonoMaxReq" : "30",
+      "abonoEfect" : "4",
+      "efectoVida" : "-5",
+      "AguaEfecto" : "-3",
+      "Vida" : "Ulr viva",
+      "Muerta" : "Url Muerta",
+      "Ahogada" : "Ahogada"
+    }]
+  } ],
+  "Season" : [ {
+    "EstacionActual" : [ {
+      "Nombre Estacion" : "Summer",
+      "diasLimites" : "95",
+      "isActive" : "true",
+      "Temperatura  Min" : "30",
+      "Temperatura Max" : "60",
+      "Precipitacion" : "2",
+      "AguaEfecto" : "2"
+    }, {
+      "Nombre Estacion" : "Spring",
+      "diasLimites" : "175",
+      "isActive" : "true",
+      "Temperatura  Min" : "10",
+      "Temperatura Max" : "30",
+      "Precipitacion" : "4",
+      "AguaEfecto" : "2"
+    }, {
+      "Nombre Estacion" : "Fall",
+      "diasLimites" : "265",
+      "isActive" : "true",
+      "Temperatura  Min" : "15",
+      "Temperatura Max" : "30",
+      "Precipitacion" : "6",
+      "AguaEfecto" : "2"
+    }, {
+      "Nombre Estacion" : "Winter",
+      "diasLimites" : "360",
+      "isActive" : "true",
+      "Temperatura  Min" : "5",
+      "Temperatura Max" : "15",
+      "Precipitacion" : "8",
+      "AguaEfecto" : "2"
+    } ]
+  } ]
+}

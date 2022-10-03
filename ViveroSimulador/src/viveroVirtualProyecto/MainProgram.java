@@ -1,6 +1,8 @@
 package viveroVirtualProyecto;
 
+import jsonScanners.Season;
 import java.util.ArrayList;
+
 
 import jsonScanners.SeasonScanner;
 import jsonScanners.SeasonTypeRead;
@@ -12,18 +14,14 @@ public class MainProgram {//for (PlantTypeRead planta: plantArray)
 	public static void main(String[] args) {		
 		ScanerPlant scanner = new ScanerPlant();
 		ArrayList<PlantTypeRead> plantas = scanner.escaneoPlanta();
+		StatusManager managerPlant = new StatusManager(plantas);
+		managerPlant.evaluateState(21);
 		
-		
-		for (int i=0 ; i<plantas.size();i++) 
-		{
-			Planta x = new Planta(plantas.get(i));
-			ArrayList<Estado> estados = x.getEstados();
-			System.out.println(x.getNombrePlanta());
-			for (int c=0 ; c<estados.size();c++) 
-			{
-				Estado estado = x.getIndexEstados(c);
-				System.out.println(estado.getDias());
-			}				
-		}
-	
-}}
+		SeasonScanner seasonScanner = new SeasonScanner();
+		ArrayList<SeasonTypeRead> seasons = seasonScanner.getSeassonRules();
+		for (int i=0 ; i<seasons.size();i++){
+			Season estacion = new Season(seasons.get(i));
+			
+			System.out.println(estacion.getEstacion());
+			System.out.println(estacion.getDiaLimite());			
+}}}

@@ -1,4 +1,4 @@
-package jsonScanners;
+package utils;
 
 public interface ConstantsEffects {
 	public static final int DAYS_IN_YEARS = 365;

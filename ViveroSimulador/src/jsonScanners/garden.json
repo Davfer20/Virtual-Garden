@@ -1,6 +1,4 @@
 {
-  "VelocidadCrecimiento" : "20",
-  "RelacionMinutos" : "2",
   "Planta" : [ {
     "Nombre" : "Manzano",
     "Niveles" : [ {
@@ -36,7 +34,7 @@
     },
     {
       "Estado" : "2",
-      "Dias Crecer" : "200",
+      "Dias Crecer" : "500",
       "minLife" : "50",
       "maxLife" : "100",
       "waterMinReq" : "20",
@@ -100,42 +98,36 @@
     }]
   } ],
   "Season" : [ {
-    "EstacionActual" : [ {
       "Nombre Estacion" : "Summer",
-      "startDate" : "21/06/2022",
-      "endDate" : "22/09/2022",
+      "diasLimites" : "95",
       "isActive" : "true",
       "Temperatura  Min" : "30",
       "Temperatura Max" : "60",
       "Precipitacion" : "2",
-      "AguaEfecto" : "2"
-    }, {
+      "AguaEfecto" : "2"}, 
+      {
       "Nombre Estacion" : "Spring",
-      "startDate" : "20/3/2022",
-      "endDate" : "21/06/2022",
+      "diasLimites" : "175",
       "isActive" : "true",
       "Temperatura  Min" : "10",
       "Temperatura Max" : "30",
       "Precipitacion" : "4",
-      "AguaEfecto" : "2"
-    }, {
+      "AguaEfecto" : "2"}, 
+      {
       "Nombre Estacion" : "Fall",
-      "startDate" : "21/12/2022",
-      "endDate" : "20/03/2022",
+      "diasLimites" : "265",
       "isActive" : "true",
       "Temperatura  Min" : "15",
       "Temperatura Max" : "30",
       "Precipitacion" : "6",
-      "AguaEfecto" : "2"
-    }, {
+      "AguaEfecto" : "2"},
+       {
       "Nombre Estacion" : "Winter",
-      "startDate" : "21/12/2022",
-      "endDate" : "20/03/2022",
+      "diasLimites" : "360",
       "isActive" : "true",
       "Temperatura  Min" : "5",
       "Temperatura Max" : "15",
       "Precipitacion" : "8",
       "AguaEfecto" : "2"
     } ]
-  } ]
 }
