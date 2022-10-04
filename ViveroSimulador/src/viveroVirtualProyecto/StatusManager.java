@@ -1,16 +1,22 @@
 package viveroVirtualProyecto;
 
 import viveroVirtualProyecto.Planta;
+import uiModel.GardenMainFrame;
+import simulation.SimulatorReport;
+import utils.ConstantsEffects;
+import utils.IObserver;
+import utils.Observable;
+import jsonScanners.PlantTypeRead;
 import java.util.ArrayList;
 
-import jsonScanners.PlantTypeRead;
 
-public class StatusManager {
+public class StatusManager implements IObserver, ConstantsEffects{
 	private ArrayList<Planta> garden;
 	private ArrayList<PlantTypeRead> listPlants;
 	
 	public StatusManager (ArrayList<PlantTypeRead> pListPlants)
 	{
+		garden = new ArrayList<Planta>();//No se como meter las plantas
 		this.listPlants = pListPlants;
 	}
 	
@@ -63,5 +69,14 @@ public class StatusManager {
 		}
 	}
 	//Se hace el overRide de update
+
+	@Override
+	public void update(Observable pObservable, Object arg) {
+		SimulatorReport simRepo = (SimulatorReport)arg;
+		if (simRepo.action.compareTo(UPDATE_DAYS)==0) {
+			//evaluate(simRepo.days);
+		}
+		
+	}
 
 }

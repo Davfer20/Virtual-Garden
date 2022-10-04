@@ -61,7 +61,7 @@ public class ScanerPlant {
 
         JSONArray plantArray = (JSONArray) jsonObject.get("Planta");
         ArrayList<PlantTypeRead> listPlantas = new ArrayList<PlantTypeRead>();
-        for (int i=0 ; i<plantArray.size();i++) //for (PlantTypeRead planta: plantArray)
+        for (int i=0 ; i<plantArray.size();i++)
         {
         	JSONObject address=(JSONObject) plantArray.get(i);
         	PlantTypeRead tipoPlanta = new PlantTypeRead();	              
