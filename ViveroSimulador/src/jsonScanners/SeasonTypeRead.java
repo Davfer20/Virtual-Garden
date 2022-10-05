@@ -35,6 +35,10 @@ public class SeasonTypeRead {
 	public int getAguaEfecto() {
 		return aguaEfecto;
 	}
+	public String getSeason ()
+	{
+		return season;
+	}
 	public void setNomEstacion(String nomEstacion) {
 		this.nomEstacion = nomEstacion;
 	}
@@ -57,6 +61,9 @@ public class SeasonTypeRead {
 		this.aguaEfecto = aguaEfecto;
 	}
 
+	public void setSeason(String pSeason) {
+		this.season = pSeason;
+	}
 
 
 }

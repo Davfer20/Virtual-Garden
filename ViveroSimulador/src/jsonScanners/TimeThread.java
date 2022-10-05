@@ -1,31 +1,54 @@
 package jsonScanners;
 
-public class TimeThread{
-	private float diasSimulacion;
-	private float porcentajeReviso;
-	private float threadValue = 0.00f;
+import viveroVirtualProyecto.StatusManager;
+
+public class TimeThread implements Runnable{
+	private int diasSimulacion;
+	private int diasActuales;
+	private int porcentajeReviso;
+	private int threadValue;
+	private Boolean runStatus = false;
+	private StatusManager manager;
 	
 	
-	public void TimeThread()
+	public TimeThread(StatusManager pManager)
 	{
-		this.diasSimulacion = 365.00f;
-		this.porcentajeReviso = 5.00f;
+		this.manager = pManager;
+		this.diasSimulacion = 400;
+		this.porcentajeReviso = 5;
+		this.diasActuales = 0;
 	}
 	
 	public void tiempoPrograma () {
 		float div = diasSimulacion / porcentajeReviso;
-		this.threadValue = div;
+		int y = Math.round(div);
+		this.threadValue = y;
 	}
 	
-	public void run () {
-		TimeThread();
+	public void setRunStaus(boolean pStatus)
+	{
+		this.runStatus = pStatus;
+		
+	}
+	public boolean getRunStaus()
+	{
+		return runStatus;
+		
+	}
+
+	
+	public void run() { 
+		//Solo empieza a correr cuando tenga una planta 
+		setRunStaus(true);
 		tiempoPrograma (); //Se llena el threadValue
-		float indexTread = 1.00f; 
+		int indexTread = 1; 		
 		try {
-			while (indexTread != threadValue)
+			while (indexTread != threadValue) //Se puede hacer con una bandera
 			{
-				
-				System.out.println("Thread Actual: "+ indexTread);
+				System.out.println("Dias: "+diasActuales);
+				manager.updateTemperature(diasActuales);
+				manager.updateAbono(0);
+				diasActuales = diasActuales+porcentajeReviso;				
 				Thread.sleep(2000);
 				indexTread ++;
 				
@@ -34,9 +57,7 @@ public class TimeThread{
 		{
 			e.printStackTrace();
 		}
-	
-		
-		
 	}
+
 	
 }

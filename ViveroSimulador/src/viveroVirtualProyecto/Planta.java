@@ -67,4 +67,9 @@ public class Planta extends PlantTypeRead{
 	public void evaluate(int currentDays)
 	{
 	}
+	
+	public void updateAbono() //la interfaz obtiene los datos del manager
+	{
+		abono += this.getEstados().get(etapaPlanta).getAbonoEfect();
+	}
 }

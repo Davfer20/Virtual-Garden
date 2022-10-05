@@ -7,68 +7,96 @@ import utils.ConstantsEffects;
 import utils.IObserver;
 import utils.Observable;
 import jsonScanners.PlantTypeRead;
+import jsonScanners.ScanerPlant;
+import jsonScanners.SeasonScanner;
+import jsonScanners.SeasonTypeRead;
 import java.util.ArrayList;
-
+import jsonScanners.TimeThread;
+import java.util.Random;
 
 public class StatusManager implements IObserver, ConstantsEffects{
 	private ArrayList<Planta> garden;
 	private ArrayList<PlantTypeRead> listPlants;
+	private SeasonScanner seasonScaner;
+	private ArrayList<SeasonTypeRead> season;
+	private SeasonTypeRead currentSeason;
+	private ScanerPlant scanner;
+	private TimeThread time;
+	private SimulatorReport dataReport;
 	
-	public StatusManager (ArrayList<PlantTypeRead> pListPlants)
-	{
-		garden = new ArrayList<Planta>();//No se como meter las plantas
-		this.listPlants = pListPlants;
-	}
-	
-	public void evaluateState(int pcurrentDays) //Guarda un nuevo state
-	{
-		for (int i=0 ; i<listPlants.size();i++){
-			int index = 0;
-			Planta planta = new Planta(listPlants.get(i));
-			while (index != 100)
-			{
-				if (planta.getIndexEstados(index).getDias() < pcurrentDays )
-				{
-					index++;										
-				}
-				else 
-				{
-					System.out.println(planta.getIndexEstados(index).getDias());	
-					break;
-				}
-			}
-		}
-	}
-	
-	public void updateTemperature(int days, int tempeture)
-	{
-
-	}
-	
-	public void updateWater(int days, int agua)
-	{
-		//Se actualiza el agua
-	}
-	
-	public void updateAbono(int days, int abono)
-	{
-		//Se actualiza el abono
-	}
-	public void pruebaDias () {
+	public StatusManager ()
+	{		
 		
-		for (int i=0 ; i<listPlants.size();i++) 
+		this.garden = new ArrayList<Planta>();
+		this.scanner = new ScanerPlant();
+		this.listPlants = scanner.escaneoPlanta();
+		this.seasonScaner = new SeasonScanner();
+		this.season = seasonScaner.getSeassonRules();
+		this.time = new TimeThread(this);
+		this.dataReport = new SimulatorReport();
+	}
+	
+	public void createPlant (int pIndex)//Index de la planta
+	{
+		PlantTypeRead plantaJson = listPlants.get(pIndex);
+		Planta plant = new Planta(plantaJson);
+		garden.add(plant);
+		if (time.getRunStaus()!=true)
 		{
-			Planta x = new Planta(listPlants.get(i));
-			ArrayList<Estado> estados = x.getEstados();
-			System.out.println(x.getNombrePlanta());
-			for (int c=0 ; c<estados.size();c++) 
-			{
-				Estado estado = x.getIndexEstados(c);
-				System.out.println(estado.getDias());
-			}				
+			time.run();
 		}
 	}
-	//Se hace el overRide de update
+	
+	public void updateTemperature(int days)
+	{
+		days = (days%365);
+		updateSeason (days);
+		int random_int = (int)Math.floor(Math.random()*(currentSeason.getTempMax()-currentSeason.getTempMin()+1)+currentSeason.getTempMin());
+		dataReport.temperature = random_int;
+		System.out.println("Temperatra:" +dataReport.temperature);		
+		System.out.println("Dia limite:" +currentSeason.getDiaLimite());	
+	}
+		
+	
+	public void updateWater(int pIndex) //Se agrega agua a planta
+	{
+		garden.get(pIndex).getAgua();
+		int agua = currentSeason.getAguaEfecto();
+	}
+	
+	public void updateAbono(int pIndex)
+	{
+		//metodo para aumentar abono
+		//get abono y despues se le sume lo que se aumenta por click
+		int abono = garden.get(pIndex).getAbono();
+		garden.get(pIndex).setAbono(abono+1);
+		System.out.println("Abono:" +garden.get(pIndex).getAbono());	
+		
+	}
+
+	public void setCurrentSeason(int pIndex) //Sirve
+	{
+		this.currentSeason = season.get(pIndex);
+	}
+	public void updateSeason (int days) //Sirve
+	{
+		setCurrentSeason(0);
+		days = (days%365);
+		if (currentSeason.getDiaLimite()< days)
+		{
+			int index = 0;
+			boolean bandera = false;
+			while (bandera == false)
+			{
+				if (season.get(index).getDiaLimite() <= days);
+				{
+					index++;
+				}
+				bandera = true;
+			}
+			setCurrentSeason(index);
+		}
+	}
 
 	@Override
 	public void update(Observable pObservable, Object arg) {

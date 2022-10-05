@@ -6,6 +6,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,6 +21,7 @@ import javax.swing.JTextField;
 public class GardenMainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private GardenController controller;
+	
 	private JTextField txtAmount;
 	
 	private JPanel gardenSide;
@@ -27,6 +30,7 @@ public class GardenMainFrame extends JFrame {
 	private JButton buttonPrueba;
 	private JButton addPlant;
 	private JButton culantro;
+	private JButton btn;
 	
 	public GardenMainFrame(GardenController pController) {
 		
@@ -37,18 +41,22 @@ public class GardenMainFrame extends JFrame {
 		this.setResizable(false);
 		this.setBounds(0, 0, 1000, 650);
 		this.setLocationRelativeTo(null);
-		this.setLayout(null); // this allows this frame to locate the components with freedom in the screen
+		this.setLayout(null); //Un metodo para acomodar automaticamente
 		this.setBackground(Color.white);
 		this.initComponents();
 		this.setVisible(true);	
 	}
-	
+
+	private void prueba() {
+		gardenSide.setVisible(false);
+		JButton btn = new JButton ("Prueba btn");
+		btn.setBounds(0, 0, 300,20);
+		gardenSide.add(btn);
+		gardenSide.setVisible(true);
+		//Los visible sirven para que se actualize
+	}
 	private void initComponents ()
-	{
-		JLabel captionAmount = new JLabel("ViveroPlantas");
-    	captionAmount.setBounds(10, 20, 160, 20);
-    	this.add(captionAmount);
-    	
+	{   			
     	txtAmount = new JTextField();
     	txtAmount.setBounds(230, 20, 160, 20);
     	this.add(txtAmount);
@@ -61,39 +69,41 @@ public class GardenMainFrame extends JFrame {
     			txtAmount.setText("Churrumi");
     		}  
     	});
-    	
+
 		addPlant = new JButton("Add Plant");  
-		addPlant.setBounds(160, 150, 300,20);
     	this.add(addPlant);
     	addPlant.addActionListener(new ActionListener(){  
     		public void actionPerformed(ActionEvent e){
-    			txtAmount.setText("Churrumi");
+    			prueba();
     		}  
     	});
     	
-		culantro = new JButton("Culantro");  
-    	this.add(addPlant);
-    	culantro.setVerticalAlignment(JButton.TOP);
-    	addPlant.addActionListener(new ActionListener(){  
-    		public void actionPerformed(ActionEvent e){
+		culantro = new JButton("Culantro");
+		//culantro.setVerticalAlignment(JButton.TOP);
+		//culantro.setHorizontalAlignment(JButton.LEFT);
+    	//culantro.setBounds(50, 20, 10,40);
+    	culantro.addActionListener(new ActionListener(){  
+    		public void actionPerformed(ActionEvent e){   			
     		}  
-    	});
+    	});      	
     	
-    	
-		
 		gardenSide = new JPanel();
 		gardenSide.setBackground(Color.white);
 		gardenSide.setBounds(0, 0, 750, 650);
 		this.add(gardenSide);
+		//this.gardenSide.setLayout(null);
 		
+	 	
 		commandSide = new JPanel();
 		commandSide.setBackground(Color.gray);
 		commandSide.setBounds(750, 0, 250, 650);
+		
+		commandSide.add(culantro);
+		commandSide.add(addPlant);
 		this.add(commandSide);
 		
-		commandSide.add(addPlant);
 	
-		
 
     }
+	
 }

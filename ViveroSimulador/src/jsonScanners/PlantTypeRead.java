@@ -30,6 +30,4 @@ public class PlantTypeRead {
 	{
 		return estados.get(pId);
 	}
-	
-
 }

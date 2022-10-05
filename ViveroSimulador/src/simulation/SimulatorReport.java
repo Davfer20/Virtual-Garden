@@ -5,4 +5,6 @@ public class SimulatorReport {
 	public int temperature;
 	public int rain;
 	public String action;
+	
+	
 }

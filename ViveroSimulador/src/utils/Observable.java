@@ -29,7 +29,7 @@ public class Observable { //Hace un thread separado para mantener fluidez
 		}
 	}
 	
-	public void notify(Object pValue) {
+	public void notify(Object pValue) {//Recibe valor de lo que recibe
 		Observable thisInstance = this;
 		
 		for(IObserver observer : observers) {
