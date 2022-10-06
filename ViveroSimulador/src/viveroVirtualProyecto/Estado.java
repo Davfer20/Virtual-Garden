@@ -92,10 +92,4 @@ public class Estado {
 	public void setURls(ArrayList<?> uRls) {
 		URLs = uRls;
 	}
-	public void ShowData()
-	{
-		System.out.println("Prueba sobre tener URL"+ URLs);
-		System.out.println("Prueba sobre tener vidaEfect"+ abonoMin);
-		System.out.println("Prueba sobre dias"+dias);
-	}
 }

@@ -24,9 +24,8 @@ public class StatusManager implements IObserver, ConstantsEffects{
 	private TimeThread time;
 	private SimulatorReport dataReport;
 	
-	public StatusManager ()
+	public StatusManager () //Constructor con datos nesesarios
 	{		
-		
 		this.garden = new ArrayList<Planta>();
 		this.scanner = new ScanerPlant();
 		this.listPlants = scanner.escaneoPlanta();
@@ -34,9 +33,10 @@ public class StatusManager implements IObserver, ConstantsEffects{
 		this.season = seasonScaner.getSeassonRules();
 		this.time = new TimeThread(this);
 		this.dataReport = new SimulatorReport();
+		this.currentSeason = season.get(0);
 	}
 	
-	public void createPlant (int pIndex)//Index de la planta
+	public void createPlant (int pIndex)//Index de la planta y la crea
 	{
 		PlantTypeRead plantaJson = listPlants.get(pIndex);
 		Planta plant = new Planta(plantaJson);
@@ -47,7 +47,7 @@ public class StatusManager implements IObserver, ConstantsEffects{
 		}
 	}
 	
-	public void updateTemperature(int days)
+	public void updateTemperature(int days)//Depende de los dias cambia la temp
 	{
 		days = (days%365);
 		updateSeason (days);
@@ -57,20 +57,17 @@ public class StatusManager implements IObserver, ConstantsEffects{
 		System.out.println("Dia limite:" +currentSeason.getDiaLimite());	
 	}
 		
-	
-	public void updateWater(int pIndex) //Se agrega agua a planta
+	public void updateWater(int pIndex) //Se agrega agua a planta con indice de la planta
 	{
-		garden.get(pIndex).getAgua();
-		int agua = currentSeason.getAguaEfecto();
+		garden.get(pIndex).setAgua(1);
+		System.out.println("Agua:" +garden.get(pIndex).getAgua());
 	}
 	
 	public void updateAbono(int pIndex)
 	{
-		//metodo para aumentar abono
-		//get abono y despues se le sume lo que se aumenta por click
-		int abono = garden.get(pIndex).getAbono();
-		garden.get(pIndex).setAbono(abono+1);
-		System.out.println("Abono:" +garden.get(pIndex).getAbono());	
+		garden.get(pIndex).setAbono(1);
+		System.out.println("Planta:" +garden.get(pIndex).getNombrePlanta());
+		System.out.println("Abono1 :" +garden.get(pIndex).getAbono());	
 		
 	}
 
@@ -78,10 +75,8 @@ public class StatusManager implements IObserver, ConstantsEffects{
 	{
 		this.currentSeason = season.get(pIndex);
 	}
-	public void updateSeason (int days) //Sirve
-	{
-		setCurrentSeason(0);
-		days = (days%365);
+	public void updateSeason (int days) //Error con año
+	{	
 		if (currentSeason.getDiaLimite()< days)
 		{
 			int index = 0;
@@ -91,11 +86,29 @@ public class StatusManager implements IObserver, ConstantsEffects{
 				if (season.get(index).getDiaLimite() <= days);
 				{
 					index++;
+				} 
+				if (season.get(index).getDiaLimite() > days)
+				{
+					System.out.println("Correcto");
+					bandera = true;
+				} 
+				if(days >365){
+					index = 0;
+					bandera = true;	
 				}
-				bandera = true;
+
 			}
 			setCurrentSeason(index);
 		}
+	}	
+	public void updateEtapaPlanta(int pIndex)
+	{
+		
+	}
+	
+	public void evaluatePlant(int pIndex)
+	{
+		garden.get(pIndex).evaluate(pIndex);
 	}
 
 	@Override

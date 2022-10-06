@@ -5,7 +5,8 @@ import jsonScanners.PlantTypeRead;
 public class Planta extends PlantTypeRead{
 	private String nombrePlanta;
 	private int etapaPlanta;
-	private int tiempoVida;
+	private int diasVida;
+	private int puntosVida;
 	private int abono;
 	private int agua;
 	
@@ -13,6 +14,8 @@ public class Planta extends PlantTypeRead{
 	{
 		this.nombrePlanta = plantaActual.getNamePlant(); 	
 		this.setEstados(plantaActual.getEstados());
+		this.diasVida = 0;
+		this.puntosVida = 100;
 	}
 	
 	public String getNombrePlanta() {
@@ -23,12 +26,6 @@ public class Planta extends PlantTypeRead{
 	public int getEtapaPlanta() {
 		return etapaPlanta;
 	}
-
-
-	public int getTiempoVida() {
-		return tiempoVida;
-	}
-
 
 	public int getAbono() {
 		return abono;
@@ -49,27 +46,35 @@ public class Planta extends PlantTypeRead{
 		this.etapaPlanta = etapaPlanta;
 	}
 
-
-	public void setTiempoVida(int tiempoVida) {
-		this.tiempoVida = tiempoVida;
+	public void setAbono(int pAbono) {
+		int abonoRule = this.getAbonoFromSate(etapaPlanta) *pAbono;
+		this.abono = (abonoRule+abono);		
 	}
 
-
-	public void setAbono(int abono) {
-		this.abono = abono;
+	public void setDecreaseLifePoints(int pPuntoVida) {
+		int decVida = this.getEfectoVidaFromState(etapaPlanta) *pPuntoVida;
+		this.puntosVida = (decVida+puntosVida);		
+		System.out.println("TotalPuntosVida:"+puntosVida);
 	}
 
-
-	public void setAgua(int agua) {
-		this.agua = agua;
+	public void setAgua(int pAgua) {
+		int aguaRule = this.getAguaFromState(etapaPlanta) *pAgua;
+		this.agua = (aguaRule + agua);
 	}
 
-	public void evaluate(int currentDays)
+	public void evaluate(int pIndexPlant)
 	{
-	}
-	
-	public void updateAbono() //la interfaz obtiene los datos del manager
-	{
-		abono += this.getEstados().get(etapaPlanta).getAbonoEfect();
+		if (this.getAbonoMaxFromState(etapaPlanta) < abono || this.getAbonoMinFromState(etapaPlanta) > abono)
+		{
+			setDecreaseLifePoints(1);
+		}
+		if (this.getMaxAguaFromState(etapaPlanta) < agua || this.getMinAguaFromState(etapaPlanta) > agua)
+		{
+			setDecreaseLifePoints(1);
+		}
+		if (this.getDiasLimFromState(etapaPlanta) < diasVida)
+		{
+			
+		}
 	}
 }

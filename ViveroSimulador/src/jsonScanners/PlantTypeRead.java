@@ -30,4 +30,44 @@ public class PlantTypeRead {
 	{
 		return estados.get(pId);
 	}
+	
+	public int getEfectoVidaFromState(int pIndexEstado) {
+		return estados.get(pIndexEstado).getVidaEfect();
+	}
+	
+	public int getAbonoFromSate(int pIndexEstado) {
+		return estados.get(pIndexEstado).getAbonoEfect();
+	}
+	
+	public int getAguaFromState(int pIndexEstado) {		
+		return estados.get(pIndexEstado).getWaterEfect();
+	}
+	
+	public int getMaxAguaFromState(int pIndexEstado) {		
+		return estados.get(pIndexEstado).getWaterMax();
+	}
+
+	public int getMinAguaFromState(int pIndexEstado) {		
+		return estados.get(pIndexEstado).getWaterMin();
+	}
+	
+	public int getAbonoMinFromState(int pIndexEstado) {		
+		return estados.get(pIndexEstado).getAbonoMin();
+	}
+	
+	public int getAbonoMaxFromState(int pIndexEstado) {		
+		return estados.get(pIndexEstado).getAbonoMax();
+	}
+	
+	public int getDiasLimFromState(int pIndexEstado) {		
+		return estados.get(pIndexEstado).getDias();
+	}
+	
+	public int getMinLifeFromState(int pIndexEstado) {		
+		return estados.get(pIndexEstado).getMinLife();
+	}
+	
+	public int getMaxLifeFromState(int pIndexEstado) {		
+		return estados.get(pIndexEstado).getMaxLife();
+	}	
 }

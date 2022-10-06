@@ -2,12 +2,14 @@ package jsonScanners;
 
 import viveroVirtualProyecto.Estado;
 
+
 import java.io.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import org.json.simple.*;
 import org.json.simple.parser.*;
+
 
 public class ScanerPlant {
 	private JSONObject jsonObject;

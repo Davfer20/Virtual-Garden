@@ -48,8 +48,10 @@ public class TimeThread implements Runnable{
 				System.out.println("Dias: "+diasActuales);
 				manager.updateTemperature(diasActuales);
 				manager.updateAbono(0);
+				manager.updateWater(0);
+				manager.evaluatePlant(0);
 				diasActuales = diasActuales+porcentajeReviso;				
-				Thread.sleep(2000);
+				Thread.sleep(1000);
 				indexTread ++;
 				
 			}
