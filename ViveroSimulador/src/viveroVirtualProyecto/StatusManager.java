@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import jsonScanners.TimeThread;
 import java.util.Random;
 
-public class StatusManager implements IObserver, ConstantsEffects{
+public class StatusManager implements ConstantsEffects{
 	private ArrayList<Planta> garden;
 	private ArrayList<PlantTypeRead> listPlants;
 	private SeasonScanner seasonScaner;
@@ -53,22 +53,22 @@ public class StatusManager implements IObserver, ConstantsEffects{
 		updateSeason (days);
 		int random_int = (int)Math.floor(Math.random()*(currentSeason.getTempMax()-currentSeason.getTempMin()+1)+currentSeason.getTempMin());
 		dataReport.temperature = random_int;
-		System.out.println("Temperatra:" +dataReport.temperature);		
+		//System.out.println("Temperatra:" +dataReport.temperature);		
 		System.out.println("Dia limite:" +currentSeason.getDiaLimite());	
 	}
 		
 	public void updateWater(int pIndex) //Se agrega agua a planta con indice de la planta
 	{
 		garden.get(pIndex).setAgua(1);
-		System.out.println("Agua:" +garden.get(pIndex).getAgua());
+		//System.out.println("Agua:" +garden.get(pIndex).getAgua());
+		System.out.println("Limte Dias de etapa:" +garden.get(pIndex).getDiasLimFromState(garden.get(pIndex).getEtapaPlanta()));
 	}
 	
 	public void updateAbono(int pIndex)
 	{
 		garden.get(pIndex).setAbono(1);
 		System.out.println("Planta:" +garden.get(pIndex).getNombrePlanta());
-		System.out.println("Abono1 :" +garden.get(pIndex).getAbono());	
-		
+		//System.out.println("Abono1 :" +garden.get(pIndex).getAbono());		
 	}
 
 	public void setCurrentSeason(int pIndex) //Sirve
@@ -103,21 +103,36 @@ public class StatusManager implements IObserver, ConstantsEffects{
 	}	
 	public void updateEtapaPlanta(int pIndex)
 	{
+		int size = garden.get(pIndex).getEstados().size();
+		int etapaPlanta = garden.get(pIndex).getEtapaPlanta();
+		System.out.println("Etapa Planta: "+etapaPlanta);
+		if (garden.get(pIndex).getDiasLimFromState(etapaPlanta) < garden.get(pIndex).getDiasVida())
+			{
+				if (garden.get(pIndex).getEtapaPlanta() == (size-1)){
+					System.out.println("Se va a borrar la planta ");
+					}
+				else {
+					garden.get(pIndex).setEtapaPlanta(etapaPlanta+1);
+					System.out.println("Se cambio de estado ");
+				}
+			}	
+	}
+	
+	public void updateDaysOfPlant(int pIndex)
+	{
+		garden.get(pIndex).updateDiasVida();
+	}
+	
+	public void removePlant(int pIndex)
+	{
 		
 	}
 	
 	public void evaluatePlant(int pIndex)
 	{
 		garden.get(pIndex).evaluate(pIndex);
-	}
-
-	@Override
-	public void update(Observable pObservable, Object arg) {
-		SimulatorReport simRepo = (SimulatorReport)arg;
-		if (simRepo.action.compareTo(UPDATE_DAYS)==0) {
-			//evaluate(simRepo.days);
-		}
 		
 	}
+
 
 }

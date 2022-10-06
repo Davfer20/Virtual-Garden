@@ -34,10 +34,9 @@ public class Simulator extends Observable implements Runnable, ConstantsEffects 
 				System.out.println("Han pasado "+dayPass+" dias");
 				
 				Thread.sleep(CHECKIN_TIME);
-				dayPass = (int)ChronoUnit.MILLIS.between(startedTime, LocalTime.now()) / DAY_IN_MILLIS;
+				dayPass = (int)ChronoUnit.MILLIS.between(startedTime, LocalTime.now());
 				
 				SimulatorReport report = new SimulatorReport();
-				report.action = UPDATE_DAYS;
 				report.days = dayPass;
 				
 				this.notifyObservers(report);
@@ -54,7 +53,6 @@ public class Simulator extends Observable implements Runnable, ConstantsEffects 
 		this.weatherLastUpdate = LocalTime.now();
 		
 		SimulatorReport report = new SimulatorReport();
-		report.action = UPDATE_WEATHER;
 		report.rain = pRain;
 		report.temperature = pTemp;
 		report.days = dayPass;

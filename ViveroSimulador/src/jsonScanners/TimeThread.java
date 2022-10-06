@@ -1,8 +1,9 @@
 package jsonScanners;
 
+import utils.ConstantsEffects;
 import viveroVirtualProyecto.StatusManager;
 
-public class TimeThread implements Runnable{
+public class TimeThread implements Runnable, ConstantsEffects{
 	private int diasSimulacion;
 	private int diasActuales;
 	private int porcentajeReviso;
@@ -14,7 +15,7 @@ public class TimeThread implements Runnable{
 	public TimeThread(StatusManager pManager)
 	{
 		this.manager = pManager;
-		this.diasSimulacion = 400;
+		this.diasSimulacion = DAYS_IN_YEARS;
 		this.porcentajeReviso = 5;
 		this.diasActuales = 0;
 	}
@@ -43,14 +44,17 @@ public class TimeThread implements Runnable{
 		tiempoPrograma (); //Se llena el threadValue
 		int indexTread = 1; 		
 		try {
-			while (indexTread != threadValue) //Se puede hacer con una bandera
+			while (indexTread != CHECKIN_TIME) //Se puede hacer con una bandera
 			{
 				System.out.println("Dias: "+diasActuales);
 				manager.updateTemperature(diasActuales);
 				manager.updateAbono(0);
 				manager.updateWater(0);
 				manager.evaluatePlant(0);
-				diasActuales = diasActuales+porcentajeReviso;				
+				manager.updateEtapaPlanta(0);
+				manager.updateDaysOfPlant(0);
+
+				diasActuales = diasActuales+TASA_REVISO;				
 				Thread.sleep(1000);
 				indexTread ++;
 				

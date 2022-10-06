@@ -31,6 +31,11 @@ public class PlantTypeRead {
 		return estados.get(pId);
 	}
 	
+	public int getEstadoFromState(int pIndexEstado)
+	{
+		return 0;
+		
+	}
 	public int getEfectoVidaFromState(int pIndexEstado) {
 		return estados.get(pIndexEstado).getVidaEfect();
 	}
