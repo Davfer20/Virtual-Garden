@@ -123,7 +123,7 @@
       "AguaEfecto" : "2"},
        {
       "Nombre Estacion" : "Winter",
-      "diasLimites" : "360",
+      "diasLimites" : "365",
       "isActive" : "true",
       "Temperatura  Min" : "5",
       "Temperatura Max" : "15",

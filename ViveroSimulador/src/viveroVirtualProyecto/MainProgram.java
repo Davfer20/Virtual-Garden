@@ -2,6 +2,7 @@ package viveroVirtualProyecto;
 
 import uiModel.GardenController;
 
+
 import uiModel.GardenMainFrame;
 import jsonScanners.Season;
 import java.util.ArrayList;
@@ -16,11 +17,11 @@ import viveroVirtualProyecto.Planta;
 public class MainProgram {//for (PlantTypeRead planta: plantArray)
 	public static void main(String[] args) {	
 
-
-		StatusManager manager = new StatusManager();
-		manager.createPlant(0);
-		
-		//managerPlant.evaluateState(21);
+		GardenController contolTotal = new GardenController();
+		ArrayList<Integer> listaEnteros = new ArrayList<Integer>();
+		listaEnteros.add(1);
+		listaEnteros.add(0);
+		contolTotal.crearPlanta(listaEnteros);
 		
 		/*
 		SeasonScanner seasonScanner = new SeasonScanner();
@@ -32,5 +33,5 @@ public class MainProgram {//for (PlantTypeRead planta: plantArray)
 			System.out.println(estacion.getDiaLimite());			
 		*/	
 		//GardenController controller = new GardenController();
-		//GardenMainFrame interfaz = new GardenMainFrame(controller);
+		//GardenMainFrame interfaz = new GardenMainFrame(contolTotal);
 }}

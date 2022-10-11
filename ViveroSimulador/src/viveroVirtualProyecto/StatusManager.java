@@ -1,18 +1,15 @@
 package viveroVirtualProyecto;
 
-import viveroVirtualProyecto.Planta;
-import uiModel.GardenMainFrame;
+
 import simulation.SimulatorReport;
 import utils.ConstantsEffects;
-import utils.IObserver;
-import utils.Observable;
+
 import jsonScanners.PlantTypeRead;
-import jsonScanners.ScanerPlant;
 import jsonScanners.SeasonScanner;
 import jsonScanners.SeasonTypeRead;
 import java.util.ArrayList;
 import jsonScanners.TimeThread;
-import java.util.Random;
+
 
 public class StatusManager implements ConstantsEffects{
 	private ArrayList<Planta> garden;
@@ -20,41 +17,51 @@ public class StatusManager implements ConstantsEffects{
 	private SeasonScanner seasonScaner;
 	private ArrayList<SeasonTypeRead> season;
 	private SeasonTypeRead currentSeason;
-	private ScanerPlant scanner;
+	
 	private TimeThread time;
 	private SimulatorReport dataReport;
 	
-	public StatusManager () //Constructor con datos nesesarios
+	public StatusManager (ArrayList<PlantTypeRead> pListPlants) //Constructor con datos nesesarios
 	{		
 		this.garden = new ArrayList<Planta>();
-		this.scanner = new ScanerPlant();
-		this.listPlants = scanner.escaneoPlanta();
+		this.listPlants = pListPlants; //Antes era pScanner.escaneoPlanta();
 		this.seasonScaner = new SeasonScanner();
 		this.season = seasonScaner.getSeassonRules();
 		this.time = new TimeThread(this);
 		this.dataReport = new SimulatorReport();
-		this.currentSeason = season.get(0);
+		this.currentSeason = season.get(0); //Guarda la season inicial
 	}
 	
-	public void createPlant (int pIndex)//Index de la planta y la crea
+	public void createPlant (ArrayList<Integer> pListaEnteros)//Index de la planta y la crea
 	{
-		PlantTypeRead plantaJson = listPlants.get(pIndex);
-		Planta plant = new Planta(plantaJson);
-		garden.add(plant);
-		if (time.getRunStaus()!=true)
+		 for (int i=0 ; i <= pListaEnteros.size();i++)
+		 {
+			Planta plant = new Planta(listPlants.get(pListaEnteros.get(i)));
+			garden.add(plant);
+			System.out.println("GARDENSIZE:" +garden.size());		
+
+		if (time.getRunStaus()!=true)//Comienza el thread hasta que haya una planta
 		{
 			time.run();
 		}
+		 }
+	}
+	public ArrayList <Planta> accesGarden(){
+		return this.garden;
 	}
 	
 	public void updateTemperature(int days)//Depende de los dias cambia la temp
 	{
-		days = (days%365);
+		if (days > 364 && currentSeason.getDiaLimite() == 365) {
+			setCurrentSeason(0);
+		}
+		days = days%365;
 		updateSeason (days);
 		int random_int = (int)Math.floor(Math.random()*(currentSeason.getTempMax()-currentSeason.getTempMin()+1)+currentSeason.getTempMin());
 		dataReport.temperature = random_int;
-		//System.out.println("Temperatra:" +dataReport.temperature);		
-		System.out.println("Dia limite:" +currentSeason.getDiaLimite());	
+		System.out.println("Temperatura:" +dataReport.temperature);		
+		System.out.println("Limite dia estacion:" +currentSeason.getDiaLimite());	
+		System.out.println("Estacion Actual:" +currentSeason.getNomEstacion());
 	}
 		
 	public void updateWater(int pIndex) //Se agrega agua a planta con indice de la planta
@@ -89,7 +96,6 @@ public class StatusManager implements ConstantsEffects{
 				} 
 				if (season.get(index).getDiaLimite() > days)
 				{
-					System.out.println("Correcto");
 					bandera = true;
 				} 
 				if(days >365){
@@ -121,17 +127,27 @@ public class StatusManager implements ConstantsEffects{
 	public void updateDaysOfPlant(int pIndex)
 	{
 		garden.get(pIndex).updateDiasVida();
-	}
-	
-	public void removePlant(int pIndex)
-	{
-		
+		System.out.println("Nombre de Planta: "+garden.get(pIndex).getNombrePlanta());
 	}
 	
 	public void evaluatePlant(int pIndex)
 	{
 		garden.get(pIndex).evaluate(pIndex);
 		
+	}
+	
+	public void update(int pIndex) {
+		int f = 0;
+	while (f != garden.size())
+	{
+		System.out.println("UPDATE----------------------------");
+		updateDaysOfPlant(f);
+		updateWater(f);
+		updateAbono(f);
+		updateEtapaPlanta(f);
+		f++;
+		}
+	updateSeason (pIndex);
 	}
 
 

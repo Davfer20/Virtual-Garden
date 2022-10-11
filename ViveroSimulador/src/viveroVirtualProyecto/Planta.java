@@ -64,7 +64,17 @@ public class Planta extends PlantTypeRead implements ConstantsEffects{
 	}
 	
 	public void updateDiasVida() {
-		this.diasVida = diasVida + TASA_REVISO;
+		int diasCheck = diasVida + TASA_REVISO;
+		if (diasCheck < 0)
+		{
+			diasCheck = 0;
+		}
+		if (diasCheck >100)
+		{
+			diasCheck = 100;
+		}
+		
+		this.diasVida = diasCheck;
 		System.out.println("Dias vida de planta: "+getDiasVida());
 	}
 

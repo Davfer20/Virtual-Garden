@@ -4,11 +4,13 @@ import uiModel.GardenController;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JComboBox;
@@ -18,24 +20,25 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import jsonScanners.PlantTypeRead;
+
 public class GardenMainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private GardenController controller;
-	
+	private ArrayList<PlantTypeRead> plantListJSON;
+	private JPanel panelG, panelC, panelP;
+	private int panel2xMax, panel2yMax;
 	private JTextField txtAmount;
+
+	private JButton plantTypeButton;
 	
-	private JPanel gardenSide;
-	private JPanel commandSide;
-	
-	private JButton buttonPrueba;
-	private JButton addPlant;
-	private JButton culantro;
 	private JButton btn;
 	
 	public GardenMainFrame(GardenController pController) {
 		
 		controller = pController; // frame ve al controller
 		controller.setWindow(this); // controller ve al frame
+		getJSONPlantList();
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
@@ -46,63 +49,80 @@ public class GardenMainFrame extends JFrame {
 		this.initComponents();
 		this.setVisible(true);	
 	}
-
-	private void prueba() {
-		gardenSide.setVisible(false);
-		JButton btn = new JButton ("Prueba btn");
-		btn.setBounds(0, 0, 300,20);
-		gardenSide.add(btn);
-		gardenSide.setVisible(true);
-		//Los visible sirven para que se actualize
-	}
-	private void initComponents ()
-	{   			
-    	txtAmount = new JTextField();
-    	txtAmount.setBounds(230, 20, 160, 20);
-    	this.add(txtAmount);
-    	
-    	buttonPrueba = new JButton("Prueba");  
-    	buttonPrueba.setBounds(100, 50, 100,20);
-    	this.add(buttonPrueba);
-    	buttonPrueba.addActionListener(new ActionListener(){  
-    		public void actionPerformed(ActionEvent e){
-    			txtAmount.setText("Churrumi");
-    		}  
-    	});
-
-		addPlant = new JButton("Add Plant");  
-    	this.add(addPlant);
-    	addPlant.addActionListener(new ActionListener(){  
-    		public void actionPerformed(ActionEvent e){
-    			prueba();
-    		}  
-    	});
-    	
-		culantro = new JButton("Culantro");
-		//culantro.setVerticalAlignment(JButton.TOP);
-		//culantro.setHorizontalAlignment(JButton.LEFT);
-    	//culantro.setBounds(50, 20, 10,40);
-    	culantro.addActionListener(new ActionListener(){  
-    		public void actionPerformed(ActionEvent e){   			
-    		}  
-    	});      	
-    	
-		gardenSide = new JPanel();
-		gardenSide.setBackground(Color.white);
-		gardenSide.setBounds(0, 0, 750, 650);
-		this.add(gardenSide);
-		//this.gardenSide.setLayout(null);
-		
-	 	
-		commandSide = new JPanel();
-		commandSide.setBackground(Color.gray);
-		commandSide.setBounds(750, 0, 250, 650);
-		
-		commandSide.add(culantro);
-		commandSide.add(addPlant);
-		this.add(commandSide);
-		
 	
+	private void getJSONPlantList() //Obtiene lista con valores
+	{
+		this.plantListJSON = controller.accesPlantType();
+	}
+	
+	private void crearNuevoPanelController() {//Crea panel con planta
+		JPanel panelc = new JPanel();
+		panelc.setBackground(Color.gray);
+		panelc.setBounds(750, 0, 250, 650);
+		panelc.setMaximumSize(new Dimension (60,50));
+		int x = (int) panelc.getBounds().getMaxX();
+		int y = (int) panelc.getBounds().getMaxY();
+		this.panel2xMax = x -750;
+		this.panel2yMax = y;
+		panelc.setLayout(null);
+		this.panelC = panelc;
+	}
+	
+	private void crearGardenPanel() {//Crea panel con planta
+		JPanel panelg = new JPanel();
+		panelg.setBackground(Color.GRAY);
+		panelg.setBounds(0, 0, 750, 650);
+		panelg.setLayout(null);
+		this.panelG = panelg;
+	}
+	
+	private void createPanel()
+	{
+		JPanel panelPlant = new JPanel();
+		panelPlant.setBounds(20, 20, 250, 200);
+		panelPlant.setBackground(Color.green);
+		panelPlant.setLayout(null);
+		
+		JLabel nombrePlanta = new JLabel("HOLA");
+		nombrePlanta.setBounds(10, 10, 100,20);
+    	panelPlant.add(nombrePlanta);
+    	////C:\RepositoriosTEC2\POO\Virtual-Garden\ViveroSimulador
+    	JLabel img = new JLabel (new ImageIcon("../ViveroSimulador/src/photos/almacigoCulantro.png"));
+    	img.setBounds(10, 20, 240,140);
+    	panelPlant.add(img);
+
+		this.panelG = panelPlant;
+	}
+	
+
+	private void plantasInicio() {
+		panelC.setVisible(false);
+		int x = 20;
+		int y = 10;
+		for (int i=0 ; i< controller.sizeArrayJsonPlants();i++)
+		{
+			String nomPlanta = plantListJSON.get(i).getNamePlant();
+			
+			this.plantTypeButton = new JButton (nomPlanta);
+			this.plantTypeButton.setBounds(x, y, 180, 30);
+			panelC.add(plantTypeButton);
+			y += 45;
+		}
+		panelC.setVisible(true);
+	}
+
+	
+	private void initComponents ()
+	{   		
+		crearNuevoPanelController();
+		crearGardenPanel();
+		
+		plantasInicio();
+		createPanel();
+    
+		this.add(panelC);
+		this.add(panelG);
+		
 
     }
 	
