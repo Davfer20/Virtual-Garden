@@ -10,9 +10,9 @@
       "waterMaxReq" : "40",
       "abonoMinReq" : "10",
       "abonoMaxReq" : "30",
-      "abonoEfect" : "4",
+      "abonoEfect" : "2",
       "efectoVida" : "-5",
-      "AguaEfecto" : "-3",
+      "AguaEfecto" : "3",
       "Vida" : "Ulr viva",
       "Muerta" : "Url Muerta",
       "Ahogada" : "Url Muerta"
@@ -25,9 +25,9 @@
       "waterMaxReq" : "60",
       "abonoMinReq" : "10",
       "abonoMaxReq" : "40",
-      "abonoEfect" : "2",
+      "abonoEfect" : "3",
       "efectoVida" : "-4",
-      "AguaEfecto" : "-4",
+      "AguaEfecto" : "4",
       "Vida" : "Ulr viva",
       "Muerta" : "Url Muerta",
       "Ahogada" : "Ahogada"
@@ -43,7 +43,7 @@
       "abonoMaxReq" : "40",
       "abonoEfect" : "2",
       "efectoVida" : "-4",
-      "AguaEfecto" : "-4",
+      "AguaEfecto" : "4",
       "Vida" : "Ulr viva",
       "Muerta" : "Url Muerta",
       "Ahogada" : "Ahogada"
@@ -61,7 +61,7 @@
       "abonoMaxReq" : "30",
       "abonoEfect" : "4",
       "efectoVida" : "-5",
-      "AguaEfecto" : "-3",
+      "AguaEfecto" : "3",
       "Vida" : "Ulr viva",
       "Muerta" : "Url Muerta",
       "Ahogada" : "Ahogada"
@@ -76,7 +76,7 @@
       "abonoMaxReq" : "30",
       "abonoEfect" : "4",
       "efectoVida" : "-5",
-      "AguaEfecto" : "-3",
+      "AguaEfecto" : "3",
       "Vida" : "Ulr viva",
       "Muerta" : "Url Muerta",
       "Ahogada" : "Ahogada"
@@ -91,7 +91,7 @@
       "abonoMaxReq" : "30",
       "abonoEfect" : "4",
       "efectoVida" : "-5",
-      "AguaEfecto" : "-3",
+      "AguaEfecto" : "3",
       "Vida" : "Ulr viva",
       "Muerta" : "Url Muerta",
       "Ahogada" : "Ahogada"

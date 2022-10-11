@@ -7,10 +7,7 @@ import viveroVirtualProyecto.Planta;
 import viveroVirtualProyecto.StatusManager;
 
 public class TimeThread implements Runnable, ConstantsEffects{
-	private int diasSimulacion;
 	private int diasActuales;
-	private int porcentajeReviso;
-	private ArrayList<Planta> gardenTime;
 	private Boolean runStatus = false;
 	private StatusManager manager;
 	
@@ -18,8 +15,6 @@ public class TimeThread implements Runnable, ConstantsEffects{
 	public TimeThread(StatusManager pManager)
 	{
 		this.manager = pManager;
-		this.diasSimulacion = DAYS_IN_YEARS;
-		this.porcentajeReviso = 5;
 		this.diasActuales = 0;
 	}
 	
@@ -39,8 +34,7 @@ public class TimeThread implements Runnable, ConstantsEffects{
 	
 	public void run() { 
 		//Solo empieza a correr cuando tenga una planta 
-		setRunStaus(true);
-		gardenTime = manager.accesGarden(); //Puede borrarse
+		setRunStaus(true);		
 		int indexTread = 1; 		
 		try {
 			while (indexTread != CHECKIN_TIME) //Se puede hacer con una bandera
@@ -48,14 +42,8 @@ public class TimeThread implements Runnable, ConstantsEffects{
 
 			System.out.println("Dias: "+diasActuales);
 			manager.update(diasActuales);
-			//manager.updateTemperature(diasActuales);
-			//manager.updateAbono(0);
-			//manager.updateWater(0);
-			//manager.evaluatePlant(0);
-			//manager.updateEtapaPlanta(0);
-			//manager.updateDaysOfPlant(0);
 			diasActuales = diasActuales+TASA_REVISO;				
-			Thread.sleep(200);
+			Thread.sleep(2000);
 			indexTread ++;							
 			}
 		}catch (InterruptedException e)

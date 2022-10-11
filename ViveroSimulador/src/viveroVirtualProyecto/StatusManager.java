@@ -24,7 +24,7 @@ public class StatusManager implements ConstantsEffects{
 	public StatusManager (ArrayList<PlantTypeRead> pListPlants) //Constructor con datos nesesarios
 	{		
 		this.garden = new ArrayList<Planta>();
-		this.listPlants = pListPlants; //Antes era pScanner.escaneoPlanta();
+		this.listPlants = pListPlants;
 		this.seasonScaner = new SeasonScanner();
 		this.season = seasonScaner.getSeassonRules();
 		this.time = new TimeThread(this);
@@ -34,18 +34,19 @@ public class StatusManager implements ConstantsEffects{
 	
 	public void createPlant (ArrayList<Integer> pListaEnteros)//Index de la planta y la crea
 	{
-		 for (int i=0 ; i <= pListaEnteros.size();i++)
+		 for (int i=0 ; i < pListaEnteros.size();i++)
 		 {
 			Planta plant = new Planta(listPlants.get(pListaEnteros.get(i)));
 			garden.add(plant);
-			System.out.println("GARDENSIZE:" +garden.size());		
+			System.out.println("Planta Creada");	
+		 }
 
 		if (time.getRunStaus()!=true)//Comienza el thread hasta que haya una planta
 		{
 			time.run();
 		}
-		 }
 	}
+
 	public ArrayList <Planta> accesGarden(){
 		return this.garden;
 	}
@@ -59,23 +60,26 @@ public class StatusManager implements ConstantsEffects{
 		updateSeason (days);
 		int random_int = (int)Math.floor(Math.random()*(currentSeason.getTempMax()-currentSeason.getTempMin()+1)+currentSeason.getTempMin());
 		dataReport.temperature = random_int;
-		System.out.println("Temperatura:" +dataReport.temperature);		
-		System.out.println("Limite dia estacion:" +currentSeason.getDiaLimite());	
 		System.out.println("Estacion Actual:" +currentSeason.getNomEstacion());
+		System.out.println("Limite dia estacion:" +currentSeason.getDiaLimite());	
+		System.out.println("Temperatura:" +dataReport.temperature);		
 	}
 		
 	public void updateWater(int pIndex) //Se agrega agua a planta con indice de la planta
 	{
 		garden.get(pIndex).setAgua(1);
-		//System.out.println("Agua:" +garden.get(pIndex).getAgua());
+		System.out.println("Agua:" +garden.get(pIndex).getAgua());
+		if (garden.get(pIndex).getDiasVida() > 40)
+		{
+			garden.get(pIndex).setAgua(6);
+		}
 		System.out.println("Limte Dias de etapa:" +garden.get(pIndex).getDiasLimFromState(garden.get(pIndex).getEtapaPlanta()));
 	}
 	
 	public void updateAbono(int pIndex)
 	{
 		garden.get(pIndex).setAbono(1);
-		System.out.println("Planta:" +garden.get(pIndex).getNombrePlanta());
-		//System.out.println("Abono1 :" +garden.get(pIndex).getAbono());		
+		System.out.println("Planta: "+garden.get(pIndex).getNombrePlanta()+" abono: "+garden.get(pIndex).getAbono());		
 	}
 
 	public void setCurrentSeason(int pIndex) //Sirve
@@ -105,6 +109,7 @@ public class StatusManager implements ConstantsEffects{
 
 			}
 			setCurrentSeason(index);
+			
 		}
 	}	
 	public void updateEtapaPlanta(int pIndex)
@@ -115,7 +120,7 @@ public class StatusManager implements ConstantsEffects{
 		if (garden.get(pIndex).getDiasLimFromState(etapaPlanta) < garden.get(pIndex).getDiasVida())
 			{
 				if (garden.get(pIndex).getEtapaPlanta() == (size-1)){
-					System.out.println("Se va a borrar la planta ");
+					garden.get(pIndex).setActivePlant(false);
 					}
 				else {
 					garden.get(pIndex).setEtapaPlanta(etapaPlanta+1);
@@ -126,8 +131,8 @@ public class StatusManager implements ConstantsEffects{
 	
 	public void updateDaysOfPlant(int pIndex)
 	{
-		garden.get(pIndex).updateDiasVida();
 		System.out.println("Nombre de Planta: "+garden.get(pIndex).getNombrePlanta());
+		garden.get(pIndex).updateDiasVida();
 	}
 	
 	public void evaluatePlant(int pIndex)
@@ -136,18 +141,25 @@ public class StatusManager implements ConstantsEffects{
 		
 	}
 	
-	public void update(int pIndex) {
-		int f = 0;
+	public void update(int pDays) {
+	int f = 0;
 	while (f != garden.size())
 	{
-		System.out.println("UPDATE----------------------------");
+		if (garden.get(f).activePlant()!=true)
+		{
+		System.out.println("-----------------------UPDATE----------------------------");
 		updateDaysOfPlant(f);
 		updateWater(f);
 		updateAbono(f);
 		updateEtapaPlanta(f);
-		f++;
+		updateSeason(pDays);
+		updateTemperature(pDays);
+		evaluatePlant(f);
+		
 		}
-	updateSeason (pIndex);
+		f++;
+	}
+	updateSeason (pDays);
 	}
 
 

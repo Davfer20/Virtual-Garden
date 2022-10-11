@@ -5,6 +5,7 @@ import utils.ConstantsEffects;
 
 public class Planta extends PlantTypeRead implements ConstantsEffects{
 	private String nombrePlanta;
+	private boolean activePlant;
 	private int etapaPlanta;
 	private int diasVida;
 	private int puntosVida;
@@ -32,6 +33,10 @@ public class Planta extends PlantTypeRead implements ConstantsEffects{
 		return abono;
 	}
 
+	public boolean activePlant()
+	{
+		return activePlant;
+	}
 
 	public int getAgua() {
 		return agua;
@@ -44,6 +49,11 @@ public class Planta extends PlantTypeRead implements ConstantsEffects{
 
 	public void setNombrePlanta(String nombrePlanta) {
 		this.nombrePlanta = nombrePlanta;
+	}
+	
+	public void setActivePlant(boolean state)
+	{
+		this.activePlant = state;
 	}
 
 
@@ -59,8 +69,11 @@ public class Planta extends PlantTypeRead implements ConstantsEffects{
 	public void setDecreaseLifePoints(int pPuntoVida) {
 		int decVida = this.getEfectoVidaFromState(etapaPlanta) *pPuntoVida;
 		this.puntosVida = (decVida+puntosVida);	
-		//System.out.println("Etapa de la planta:"+getEtapaPlanta());
-		System.out.println("TotalPuntosVida:"+puntosVida);
+		if (puntosVida < 0)
+		{
+			setActivePlant(true);
+		}
+		System.out.println("Planta: "+nombrePlanta+" TotalPuntosVida: "+puntosVida);
 	}
 	
 	public void updateDiasVida() {

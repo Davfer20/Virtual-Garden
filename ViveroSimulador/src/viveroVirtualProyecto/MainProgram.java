@@ -19,8 +19,8 @@ public class MainProgram {//for (PlantTypeRead planta: plantArray)
 
 		GardenController contolTotal = new GardenController();
 		ArrayList<Integer> listaEnteros = new ArrayList<Integer>();
-		listaEnteros.add(1);
 		listaEnteros.add(0);
+		listaEnteros.add(1);
 		contolTotal.crearPlanta(listaEnteros);
 		
 		/*
